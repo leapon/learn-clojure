@@ -19,8 +19,8 @@
       (-> #'home-routes
           (wrap-routes middleware/wrap-csrf)
           (wrap-routes middleware/wrap-formats))
-          (route/not-found
-             (:body
-               (error-page {:status 404
-                            :title "page not found"}))))))
+      (route/not-found
+         (:body
+           (error-page {:status 404
+                        :title "page not found"}))))))
 
