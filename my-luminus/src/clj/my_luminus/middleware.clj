@@ -14,7 +14,7 @@
             [ring.middleware.flash :refer [wrap-flash]]
             [immutant.web.middleware :refer [wrap-session]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]])
-  (:import 
+  (:import
            [org.joda.time ReadableInstant]))
 
 (defn wrap-internal-error [handler]
@@ -34,6 +34,12 @@
      (error-page
        {:status 403
         :title "Invalid anti-forgery token"})}))
+
+(defn wrap-custom-header [handler]
+  (fn [request]
+    (let [response (handler request)]
+      (log/info "set custom header")
+      (assoc-in response [:headers "Custom-Header"] "user/custom_value"))))
 
 (def joda-time-writer
   (transit/write-handler
@@ -78,4 +84,5 @@
         (-> site-defaults
             (assoc-in [:security :anti-forgery] false)
             (dissoc :session)))
-      wrap-internal-error))
+      wrap-internal-error
+      wrap-custom-header))
