@@ -1,0 +1,1 @@
+web: java -cp target/uberjar/my-luminus.jar clojure.main -m my-luminus.core
