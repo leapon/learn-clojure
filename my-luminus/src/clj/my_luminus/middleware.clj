@@ -37,8 +37,11 @@
 
 (defn wrap-custom-header [handler]
   (fn [request]
+    ;(log/info "request header:" (get-in request [:headers]))
+    (log/info "request uri:" (get-in request [:uri]))
+    (log/info "request query-string:" (get-in request [:query-string]))
     (let [response (handler request)]
-      (log/info "set custom header")
+      (log/info "set custom header: Custom-Header=user/custom_value")
       (assoc-in response [:headers "Custom-Header"] "user/custom_value"))))
 
 (def joda-time-writer
