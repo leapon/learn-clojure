@@ -19,9 +19,11 @@
 (defn do-s3-upload []
   ;(def upload-file   (java.io.File. "upload.txt"))
   ;(s3-utils/put-file-to-s3 ["xml-upload/testxml-367.txt" "test367" "csa-data-test"])
+  (println (DefaultAWSCredentialsProviderChain.))
   (let [buckets (list-buckets (DefaultAWSCredentialsProviderChain.))]
-    (println "buckets:" buckets))
-  (println "do s3 upload test"))
+    (println "buckets:" (count buckets))))
+    ;(println "end of list-buckets")))
+  ;(println "do s3 upload test"))
 
 
 (defn -main []
