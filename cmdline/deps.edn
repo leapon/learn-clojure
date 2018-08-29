@@ -1,2 +1,6 @@
 {:deps
- {clj-time {:mvn/version "0.14.2"}}}
+ {clj-time {:mvn/version "0.14.2"}
+  org.clojure/core.async {:mvn/version "0.3.465"}
+  httpclient/httpclient {:local/root "./lib/httpclient-4.5.jar"}
+  httpcore/httpcore {:local/root "./lib/httpcore-4.4.1.jar"}
+  clojure-helpers {:local/root "./lib/clojure-helpers-1.03.jar"}}}
