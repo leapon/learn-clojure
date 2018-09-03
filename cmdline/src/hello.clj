@@ -17,14 +17,22 @@
     dt))
 
 (defn do-s3-upload []
-  ;(def upload-file   (java.io.File. "upload.txt"))
+  (def upload-file   (java.io.File. "/tmp/upload_test.txt"))
   ;(s3-utils/put-file-to-s3 ["xml-upload/testxml-367.txt" "test367" "csa-data-test"])
   (println (DefaultAWSCredentialsProviderChain.))
   (let [buckets (list-buckets (DefaultAWSCredentialsProviderChain.))]
-    (println "buckets:" (count buckets))))
+    (println "buckets #:" (count buckets)))
     ;(println "end of list-buckets")))
   ;(println "do s3 upload test"))
-
+  (let [items (list-objects (DefaultAWSCredentialsProviderChain.) :bucket-name "csa-data-test")]
+    ;(println "items:" items)
+    (println "items #:" (count items)))
+  (let [result (put-object
+                 (DefaultAWSCredentialsProviderChain.)
+                 :bucket-name "csa-data-test"
+                 :key "xml-upload/upload-test3"
+                 :file upload-file)]
+    (println "upload result:" result)))
 
 (defn -main []
   (do-s3-upload)

@@ -1,2 +1,2 @@
-clj -m hello
+clj -J--add-modules -Jjava.xml.bind -m hello
 
